@@ -28,3 +28,4 @@ pytest tests/
 flake8 .
 mypy .
 ```
+# flask-formatter
