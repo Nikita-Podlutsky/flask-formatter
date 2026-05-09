@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from src.functional import format_text
 
 app = Flask(__name__)
 
 
 @app.route("/format", methods=["POST"])
-def format_endpoint() -> object:
+def format_endpoint() -> Response:
     data = request.get_json()
     text = data.get("text", "")
     style = data.get("style", "upper")
