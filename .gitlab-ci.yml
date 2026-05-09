@@ -1,0 +1,17 @@
+# Образ контейнера, в котором будет выполняться CI пайплайн
+image: python:3.8
+
+# Действия до запуска основных шагов пайплайна:
+# создаём виртуальное окружение и устанавливаем зависимости
+before_script:
+  - python --version
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
+
+test:
+  script:
+    - pytest tests/
+    - flake8 .
+    - mypy .
