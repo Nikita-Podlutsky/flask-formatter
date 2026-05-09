@@ -11,17 +11,14 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v3
 
-      - name: Set up Python
-        run: uv python install 3.8
-
       - name: Install dependencies
-        run: uv pip install --system -r requirements.txt
+        run: uv sync --all-groups
 
       - name: Run pytest
-        run: pytest tests/
+        run: uv run pytest tests/
 
       - name: Run flake8
-        run: flake8 .
+        run: uv run flake8 .
 
       - name: Run mypy
-        run: mypy .
+        run: uv run mypy .
