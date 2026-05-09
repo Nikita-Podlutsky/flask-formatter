@@ -7,18 +7,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.8"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Set up Python
+        run: uv python install 3.8
+
       - name: Install dependencies
-        run: |
-          pip install virtualenv
-          virtualenv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+        run: uv pip install --system -r requirements.txt
+
       - name: Run pytest
         run: pytest tests/
+
       - name: Run flake8
         run: flake8 .
+
       - name: Run mypy
         run: mypy .
